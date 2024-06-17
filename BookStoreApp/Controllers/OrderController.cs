@@ -1,0 +1,46 @@
+﻿using Entities;
+using Entities.Models;
+using Microsoft.AspNetCore.Mvc;
+using Services.Contract;
+
+namespace BookStoreApp.Controllers
+{
+    public class OrderController : Controller
+    {
+        private readonly IServiceManager _manager;
+        private readonly Cart _cart;
+
+        public OrderController(IServiceManager manager,Cart cart)
+        {
+            _manager = manager;
+            _cart = cart;
+        }
+
+        public IActionResult CheckOut()
+        {
+            return View(new Order());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CheckOut([FromForm] Order order)
+        {
+            if (_cart.Lines.Count() == 0)
+            {
+                ModelState.AddModelError("", "Your cart is empty");
+            }
+            if (ModelState.IsValid)
+            {
+                order.Lines = _cart.Lines.ToArray();
+                _manager.OrderService.SaveOrder(order);
+                _cart.Clear();
+
+                return RedirectToPage("/Complete", new Order { OrderId = order.OrderId });
+            }
+            else
+            {
+                return View();
+            }
+        }
+    }
+}

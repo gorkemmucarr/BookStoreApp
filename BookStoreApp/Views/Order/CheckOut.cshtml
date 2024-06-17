@@ -1,0 +1,25 @@
+﻿@model Order
+
+<div class="text-danger" asp-validation-summary="All"></div>
+
+<form method="post" asp-action="Checkout">
+    <div class="form-group my-5">
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+    </div>
+
+    <div class="form-group my-5">
+        <label asp-for="Line"></label>
+        <input class="form-control" asp-for="Line" />
+    </div>
+
+    <div class="form-group my-5">
+        <label asp-for="City"></label>
+        <input class="form-control" asp-for="City" />
+    </div>
+
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Complete Order</button>
+    </div>
+</form>

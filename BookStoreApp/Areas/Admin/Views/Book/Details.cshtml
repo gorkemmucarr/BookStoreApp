@@ -1,0 +1,21 @@
+﻿@model Book
+<div>Admin Book Details</div>
+
+<div>
+    <a asp-area="Admin" asp-controller="Book" asp-action="Index">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back To The Book List</a>
+</div>
+<div class="col-sm-12 col-md-4 my-3">
+    <div class="card" style="width: 18rem;">
+        <p class="display-6 text-center">@Model.BookName</p>
+        <img src="@Model?.ImageUrl" class="card-img-top" alt="jpg2.jpg">
+        <div class="card-body">
+            <div class="card-text">
+                <div class="text-danger text-center lead p-2 rounded">@Model?.Price.ToString("c2")</div>
+            </div>
+            <div class="d-flex justify-content-center">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Book>
+
+
+<div class="row">
+    <div class="col-md-3">
+        @await Component.InvokeAsync("CategoriesMenu")
+        @await Component.InvokeAsync("BookFilterMenu")
+    </div>
+    <div class="col-md-9">
+        <div class="row my-3">
+
+            @foreach (var books in Model)
+            {
+                <partial name="_BookCart" model="@books" />
+
+            }
+        </div>
+    </div>
+</div>
+
+
+

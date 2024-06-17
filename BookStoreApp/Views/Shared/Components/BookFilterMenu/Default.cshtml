@@ -1,0 +1,28 @@
+﻿
+
+<div class="my-3">
+    <h6 class="lead">
+        <i class="fa fa-filter text-secondary"></i>
+        Filters
+    </h6>
+</div>
+
+<div class="my-2">
+    <form method="get" asp-action="Index">
+        <input type="hidden" name="categoryId" value="@(Context.Request.Query["categoryId"])" />
+        <div class="form-group my-3">
+            <input class="form-control" name="SearchString" placeholder="Search" />
+        </div>
+        <div class="form-group my-3">
+            <input class="form-control" name="MinPrice" placeholder="MinPrice" />
+        </div>
+        <div class="form-group my-3">
+            <input class="form-control" name="MaxPrice" placeholder="MaxPrice" />
+        </div>
+        <div class="form-group my-3">
+            <button type="submit" class="btn btn-sm btn-primary">
+                <i class="fa-solid fa-filter"></i>
+                Filter</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<IdentityUser>
+
+<div class="text center">
+    <div class="display-6">
+        <i class="fa-solid fa-user"></i>
+        Users</div>
+    <div>
+        <a asp-action="Create" 
+        class="btn btn-primary"
+        data-toggle="tooltip"
+        data-placement="top"
+        title="Create a User">
+            <i class="fa-solid fa-user-plus"></i>
+        </a>
+    </div>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+
+<tbody>
+    @foreach (var users in Model)
+        {
+            <tr>
+                <td>@users.Id</td>
+                <td>@users.UserName</td>
+                <td user-name="@users.UserName" user-role=""></td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-warning"
+                           class="btn btn-primary"
+                           data-toggle="tooltip"
+                           data-placement="top"
+                           title="Create a User"
+                           asp-route-id="@users.UserName"
+                           asp-action="Update">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+
+                        <a class="btn btn-sm btn-info"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Reset Password"
+                        asp-route-id="@users.UserName"
+                        asp-action="ResetPassword">
+                            <i class="fa-solid fa-key"></i>
+                        </a>
+
+                        
+
+                        <form method="post" asp-action="DeleteUser">
+                            <input type="hidden" name="Username" value="@users.UserName"/>
+                            <button type="submit" 
+                                class="btn btn-danger"
+                             data-toggle="tooltip"
+                             data-placement="top"
+                             title="Delete User"
+                            >
+                                <i class="fa-solid fa-trash"></i>
+                             </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+</tbody>
+</table>
+
+
+@section Scripts
+    {
+    <script type="text/javascript">
+        $(document).ready(() => {
+            $('data-toggle="tooltip"').tooltip()
+        });
+    </script>
+}

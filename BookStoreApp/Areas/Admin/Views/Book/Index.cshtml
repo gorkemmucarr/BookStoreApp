@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Book>
+
+
+<div>
+    <a asp-area="Admin" asp-controller="Book" asp-action="Create" class="btn btn-primary">
+        <i class="fa-solid fa-plus"></i>
+        Create a Book</a>
+</div>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Image</th>
+            <th scope="col">Book Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Writer</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <th scope="row">@book.BookId</th>
+                <td>
+                    <img src="@book.ImageUrl" alt="@book.BookName" width="60" class="border border-dark rounded"/>
+                </td>
+                <td>@book.BookName</td>
+                <td>@book.CategoryId</td>
+                <td>@book.Writer</td>
+                <td>@book.Price.ToString("c")</td>
+                <td>
+                    <a
+                     data-toggle="tooltip"
+                     data-placement="top"
+                     title="Details"
+                    asp-area="Admin" 
+                    asp-controller="Book" 
+                    asp-action="Details" 
+                    asp-route-id="@book.BookId"
+                    class="btn btn-success">
+                        <i class="fa-solid fa-info"></i>
+                    </a>
+                    
+                    <a 
+                     data-toggle="tooltip"
+                     data-placement="top"
+                     title="Edit"
+                    asp-area="Admin" 
+                    asp-controller="Book" 
+                    asp-action="Update" 
+                    asp-route-id="@book.BookId"
+                    class="btn btn-primary">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </a>
+                    
+                    <a
+                     data-toggle="tooltip"
+                     data-placement="top"
+                     title="Delete"
+                    asp-area="Admin" 
+                    asp-controller="Book" 
+                    asp-action="Delete" 
+                    asp-route-id="@book.BookId"
+                    class="btn btn-danger" onclick="return confirm('Are you sure to delete this book')">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(()=>{
+            $('data-toggle="tooltip"').tooltip()
+        });    
+    </script>
+}
+
+
+
